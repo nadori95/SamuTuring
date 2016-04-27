@@ -1154,11 +1154,11 @@ public:
 
     }
     
-    typedef struct Hasonlito{
+    struct Hasonlito{
       bool operator()(const std::tuple<int,int,int>& left, const std::tuple<int,int,int>& right){
-	return std::get<2>(left) < std::get<2>(right);
+	return std::get<2>(left) > std::get<2>(right);
       }
-    } comp;
+    };
     
     std::string printSortedRules() {
 
@@ -1178,7 +1178,7 @@ public:
         }
         );
 	
-	std::sort(tmp.begin(),tmp.end(),comp);
+	std::sort(tmp.begin(),tmp.end(),Hasonlito());
 
         std::stringstream ss;
 
@@ -1186,7 +1186,7 @@ public:
 
         for ( auto& rule : tmp ) {
             //ss << ", " <<rule.first.first <<","  << rule.first.second << "(" << rule.second<< ") ";
-	    ss << ", " << std::get<0>(rule) <<", "  << std::get<1>(rule);
+	    ss << ", " << std::get<0>(rule) << ", " << std::get<1>(rule);
 	  
 	}
         return ss.str();
