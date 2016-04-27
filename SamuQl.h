@@ -1154,16 +1154,11 @@ public:
 
     }
     
-    
-    class Hasonlito{
-    public:
-      Hasonlito(const int& adat):szam(adat){}
-      bool operator()(const int& left, const int& right){
-	return left < right;
+    typedef struct Hasonlito{
+      bool operator()(const std::tuple<int,int,int>& left, const std::tuple<int,int,int>& right){
+	return std::get<2>(left) < std::get<2>(right);
       }
-    private:
-      int szam;
-    };
+    } comp;
     
     std::string printSortedRules() {
 
@@ -1183,8 +1178,7 @@ public:
         }
         );
 	
-	Hasonlito hasonlito;
-	std::sort(tmp.begin(),tmp.end(),hasonlito);
+	std::sort(tmp.begin(),tmp.end(),comp);
 
         std::stringstream ss;
 
